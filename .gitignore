@@ -1,0 +1,10 @@
+*build/
+# JetBrains CMake build files
+*cmake-build*/
+# Visual Studio JSON settings and compile_commands
+*.json
+# IDE Cache Files
+*.vs/
+*.idea/
+# clang-d caching files
+*.cache/
