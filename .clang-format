@@ -1,0 +1,14 @@
+BasedOnStyle: LLVM
+IndentWidth: 2
+ColumnLimit: 100
+Language: Cpp
+AccessModifierOffset: -2
+AlignAfterOpenBracket: DontAlign
+AlignEscapedNewlines: Left
+AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
+AllowShortFunctionsOnASingleLine: InlineOnly
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+DerivePointerAlignment: false
+PointerAlignment: Left
+IndentCaseLabels: true
+SpaceBeforeParens: Never
