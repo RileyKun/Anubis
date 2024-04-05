@@ -7,7 +7,7 @@ if not exist build\ (
 cd build
 
 if not exist CMakeFiles\ (
-  cmake -G "MinGW Makefiles" ..
+  cmake -G "Visual Studio 17 2022" ..
 )
 
 cmake --build .
