@@ -2,13 +2,13 @@
 
 #include <memory>
 
-class c_factory{
+class c_factory {
 public:
   void startup();
   void shutdown();
 
 private:
-  void hooks();
+  void hooks(bool startup);
   void interfaces();
 };
 

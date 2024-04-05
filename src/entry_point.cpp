@@ -2,7 +2,7 @@
 
 #include "factory/factory.hpp"
 
-DWORD __stdcall entry(void *arg){
+DWORD __stdcall entry(void* arg) {
   while(!GetModuleHandleA("mss32.dll"))
     Sleep(150);
 
@@ -13,24 +13,27 @@ DWORD __stdcall entry(void *arg){
 
   factory->shutdown();
 
-  FreeLibraryAndExitThread((HMODULE)arg, 0); 
+  FreeLibraryAndExitThread((HMODULE)arg, 0);
 }
 
-DWORD __stdcall exit(){ 
-  return 0; 
+DWORD __stdcall exit() {
+  factory->shutdown();
+
+  return 0;
 }
 
-int __stdcall DllMain(HMODULE inst, DWORD reason, void *arg){
-  switch(reason){
-    case DLL_PROCESS_ATTACH:{
+int __stdcall DllMain(HMODULE inst, DWORD reason, void* arg) {
+  switch(reason) {
+    case DLL_PROCESS_ATTACH: {
       HANDLE thread = CreateThread(nullptr, 0, entry, inst, 0, nullptr);
-      if(!thread)
+      if(!thread) // thread doesn't exist
         return 0;
-
+      
+      // handle is no longer needed
       CloseHandle(thread);
       return 1;
     }
-    case DLL_PROCESS_DETACH:{
+    case DLL_PROCESS_DETACH: {
       exit();
       return 1;
     }
