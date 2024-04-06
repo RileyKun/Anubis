@@ -23,7 +23,11 @@ void __fastcall hooks::fs_notify::hooked_fs_notify(void* ecx, void* edx, frame_s
     case FRAME_NET_UPDATE_START:
     case FRAME_NET_UPDATE_END:
     case FRAME_NET_UPDATE_POSTDATAUPDATE_START:
-    case FRAME_NET_UPDATE_POSTDATAUPDATE_END:
+      break;
+    case FRAME_NET_UPDATE_POSTDATAUPDATE_END: {
+      ctx->get_local();
+      break;
+    }
     case FRAME_START:
       break;
   }
