@@ -49,6 +49,7 @@ add_library(Anubis SHARED
   
   # hooks
   src/cheat/hooks/lists/createmove.cpp
+  src/cheat/hooks/lists/fs_notify.cpp
 )
 
 target_include_directories(Anubis PRIVATE src/sdk)
