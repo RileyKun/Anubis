@@ -45,5 +45,7 @@ add_library(Anubis SHARED
   src/factory/factory.cpp
 )
 
+target_include_directories(Anubis PRIVATE src/sdk)
+
 # link safetyhook to our dll
 target_link_libraries(Anubis PRIVATE safetyhook::safetyhook)
