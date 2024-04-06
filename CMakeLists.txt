@@ -46,6 +46,7 @@ add_library(Anubis SHARED
   
   # interface map outs
   src/sdk/valve/engine_client.cpp
+  src/sdk/valve/hl_client.cpp
   
   # hooks
   src/cheat/hooks/lists/createmove.cpp
