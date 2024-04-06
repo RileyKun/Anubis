@@ -43,6 +43,9 @@ CPMAddPackage(
 add_library(Anubis SHARED
   src/entry_point.cpp
   src/factory/factory.cpp
+  
+  # hooks
+  src/cheat/hooks/lists/createmove.cpp
 )
 
 target_include_directories(Anubis PRIVATE src/sdk)
