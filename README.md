@@ -32,7 +32,7 @@ All commits must be formatted using the clang-format standard set in the reposit
 - Do not use the auto keyword on explicit types.
 - Unless required, every header file should have a matching `.cpp` file. header files must be named `.hpp`
 
-**Toolchains & Dependencies**
+**Toolchains & Dependencies**  
 Our dependencies are the following:
 - CPM.cmake
 - SafetyHook
