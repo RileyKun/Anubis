@@ -44,6 +44,9 @@ add_library(Anubis SHARED
   src/entry_point.cpp
   src/factory/factory.cpp
   
+  # interface map outs
+  src/sdk/valve/engine_client.cpp
+  
   # hooks
   src/cheat/hooks/lists/createmove.cpp
 )
