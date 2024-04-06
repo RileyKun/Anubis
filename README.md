@@ -14,7 +14,7 @@ Contributions are always welcome! Follow the setup instructions and guidelines b
 ### Compiling
 You may either use the compile.bat script in the repository (if you are using a text editor that does not have a supported build system or if you are building from the command line) or use the CMake build system within your IDE. For toolchains, dependencies and more, see the guidelines section.
 ### Guidelines
-**Formatting**
+**Formatting**  
 All commits must be formatted using the clang-format standard set in the repository. If you are unable to use clang-format, the summary of the coding style is this:
 - Indentations are 2 spaces wide across ALL files. We use spaces, not tabs.
 - Opening braces must be on the same line as the start of a statement, function declaration, etc.
