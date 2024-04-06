@@ -15,8 +15,10 @@ void c_factory::shutdown() {
 void c_factory::hooks(bool startup) {
   if(startup) {
     hooks::createmove::startup();
+    hooks::fs_notify::startup();
   } else {
     hooks::createmove::shutdown();
+    hooks::fs_notify::shutdown();
   }
 }
 
