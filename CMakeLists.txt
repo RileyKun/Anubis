@@ -41,18 +41,26 @@ CPMAddPackage(
 )
 
 add_library(Anubis SHARED
+  # cheat files
   src/entry_point.cpp
   src/factory/factory.cpp
+  src/sdk/link.cpp
+  
+  # game classes
+  src/sdk/valve/netvars/netvars.cpp
   
   # interface map outs
   src/sdk/valve/engine_client.cpp
   src/sdk/valve/hl_client.cpp
+  src/sdk/valve/surface.cpp
+  src/sdk/valve/engine_vgui.cpp
   
   # hooks
   src/cheat/hooks/lists/createmove.cpp
   src/cheat/hooks/lists/fs_notify.cpp
 )
 
+# allow fast includes of sdk
 target_include_directories(Anubis PRIVATE src/sdk)
 
 # link safetyhook to our dll
