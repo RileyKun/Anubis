@@ -16,7 +16,6 @@
 // include cheat headers
 #include "shared/memory.hpp"
 
-
 // NOTE: Riley; For anyone reading this, a cleanup of i_client_ent* needs to be done.
 // While ripping interfaces straight out of the game would make things easier. I would like
 // Anubis to leave a smaller footprint in code size.
@@ -34,6 +33,9 @@ public:
 class c_ctx {
 public:
   c_tf_player* local_player = nullptr;
+  
+  int screen_width = 0;
+  int screen_height = 0;
   
   void get_local();
 };
