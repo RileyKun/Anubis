@@ -10,6 +10,12 @@ enum class panel_t : int {
   PANEL_CLIENTDLL_TOOLS
 };
 
+enum mode_t {
+  PAINT_UIPANELS = ( 1 << 0 ),
+  PAINT_INGAMEPANELS = ( 1 << 1 ),
+  PAINT_CURSOR = ( 1 << 2 )
+};
+
 using v_panel = unsigned int;
 
 class c_engine_vgui {
