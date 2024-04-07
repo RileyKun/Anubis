@@ -38,5 +38,5 @@ public:
   void get_local();
 };
 
-inline auto  ctx = std::unique_ptr<c_ctx>();
+inline auto  ctx = std::make_unique<c_ctx>();
 inline c_tf2 g_tf2{};
