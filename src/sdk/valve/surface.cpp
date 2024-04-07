@@ -61,21 +61,20 @@ DWORD i_surface::create_font(void) {
   return memory::find_vfunc<DWORD(__thiscall*)(void*)>(this, 66u)(this);
 }
 
-void i_surface::set_font_glyph_set(DWORD& font, const char* name, int tall, int height, int blur,
+void i_surface::set_font_glyph_set(DWORD& font, const char* name, int tall, int weight, int blur,
                                    int scan_lines, int flags) {
-  memory::find_vfunc<void(__thiscall*)(void*, DWORD&, const char*, int, int, int, int, int)>(
-      this, 67u)(this, font, name, tall, height, blur, scan_lines, flags);
+  memory::find_vfunc<void(__thiscall*)(void*, DWORD&, const char*, int, int, int, int, int)>(this, 67u)(this, font, name, tall, weight, blur, scan_lines, flags);
 }
 void i_surface::start() {
-  typedef void(__thiscall * start_fn)(i_surface*);
+  typedef void(__thiscall* start_fn)(i_surface*);
   static auto start_ = memory::find_pattern<start_fn>(
       "vguimatsurface.dll", "55 8B EC 64 A1 ? ? ? ? 6A FF 68 ? ? ? ? 50 64 89 25 ? ? ? ? 83 EC 14");
-  return start_(this);
+  start_(this);
 }
 void i_surface::stop() {
-  typedef void(__thiscall * stop_fn)(i_surface*);
+  typedef void(__thiscall* stop_fn)(i_surface*);
   static auto stop_ = memory::find_pattern<stop_fn>(
       "vguimatsurface.dll",
       "55 8B EC 6A FF 68 ? ? ? ? 64 A1 ? ? ? ? 50 64 89 25 ? ? ? ? 51 56 6A 00");
-  return stop_(this);
+  stop_(this);
 }

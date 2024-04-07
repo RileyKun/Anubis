@@ -2,22 +2,6 @@
 
 typedef unsigned long DWORD;
 
-enum class font_flags : int {
-  FONTFLAG_NONE,
-  FONTFLAG_ITALIC = 0x001,
-  FONTFLAG_UNDERLINE = 0x002,
-  FONTFLAG_STRIKEOUT = 0x004,
-  FONTFLAG_SYMBOL = 0x008,
-  FONTFLAG_ANTIALIAS = 0x010,
-  FONTFLAG_GAUSSIANBLUR = 0x020,
-  FONTFLAG_ROTARY = 0x040,
-  FONTFLAG_DROPSHADOW = 0x080,
-  FONTFLAG_ADDITIVE = 0x100,
-  FONTFLAG_OUTLINE = 0x200,
-  FONTFLAG_CUSTOM = 0x400,
-  FONTFLAG_BITMAP = 0x800,
-};
-
 class color {
 public:
   int R, G, B, A;
@@ -45,7 +29,7 @@ public:
   bool  is_cursor_visible(void);
   void  play_sound(const char* name);
   DWORD create_font(void);
-  void  set_font_glyph_set(DWORD& font, const char* name, int tall, int height, int blur,
+  void  set_font_glyph_set(DWORD& font, const char* name, int tall, int weight, int blur,
                            int scan_lines, int flags);
   void start();
   void stop();
