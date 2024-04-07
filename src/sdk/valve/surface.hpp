@@ -47,4 +47,6 @@ public:
   DWORD create_font(void);
   void  set_font_glyph_set(DWORD& font, const char* name, int tall, int height, int blur,
                            int scan_lines, int flags);
+  void start();
+  void stop();
 };
