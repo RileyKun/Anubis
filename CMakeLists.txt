@@ -8,24 +8,24 @@ set(CMAKE_CXX_STANDARD 23)
 set(CPM_DOWNLOAD_VERSION 0.38.7)
 set(CPM_HASH_SUM "83e5eb71b2bbb8b1f2ad38f1950287a057624e385c238f6087f94cdfc44af9c5")
 
-if (CPM_SOURCE_CACHE)
+if(CPM_SOURCE_CACHE)
   set(CPM_DOWNLOAD_LOCATION "${CPM_SOURCE_CACHE}/cpm/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
-elseif (DEFINED ENV{CPM_SOURCE_CACHE})
+elseif(DEFINED ENV{CPM_SOURCE_CACHE})
   set(CPM_DOWNLOAD_LOCATION "$ENV{CPM_SOURCE_CACHE}/cpm/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
-else ()
+else()
   set(CPM_DOWNLOAD_LOCATION "${CMAKE_BINARY_DIR}/cmake/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
-endif ()
+endif()
 
 get_filename_component(CPM_DOWNLOAD_LOCATION ${CPM_DOWNLOAD_LOCATION} ABSOLUTE)
 
-if (NOT EXISTS ${CPM_DL_LOCATION})
+if(NOT EXISTS ${CPM_DL_LOCATION})
   message(STATUS "Downloading CPM.cmake to: ${CPM_DOWNLOAD_LOCATION}")
   
   file(DOWNLOAD
     https://github.com/cpm-cmake/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake
     ${CPM_DOWNLOAD_LOCATION} EXPECTED_HASH SHA256=${CPM_HASH_SUM}
   )
-endif ()
+endif()
 
 include(${CPM_DOWNLOAD_LOCATION})
 
@@ -58,10 +58,48 @@ add_library(Anubis SHARED
   # hooks
   src/cheat/hooks/lists/createmove.cpp
   src/cheat/hooks/lists/fs_notify.cpp
+  
+  # features
+  src/cheat/features/movement/movement.cpp
 )
 
 # allow fast includes of sdk
 target_include_directories(Anubis PRIVATE src/sdk)
+
+# allow fast includes of features
+target_include_directories(Anubis PRIVATE src/cheat/features)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  target_compile_definitions(Anubis PRIVATE
+    NOMINMAX
+  )
+  target_compile_options(Anubis PRIVATE
+    /Od # disable optimizations
+    /MP
+    /Zi # generate debug info, do not allow edit and continue
+  )
+elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+  target_compile_definitions(Anubis PRIVATE
+    NOMINMAX
+    NDEBUG
+  )
+  target_compile_options(Anubis PRIVATE
+    /O2 # enable optimizations
+    /MP
+    /Zi # Generate debug info, do not allow edit and continue
+  )
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  target_compile_definitions(Anubis PRIVATE
+    NOMINMAX
+    NDEBUG
+  )
+  target_compile_options(Anubis PRIVATE
+    /MP
+    /O2
+  )
+else()
+  message(FATAL_ERROR "Your build type is not supported. Please check your toolchains and try again.")
+endif()
 
 # link safetyhook to our dll
 target_link_libraries(Anubis PRIVATE safetyhook::safetyhook)
