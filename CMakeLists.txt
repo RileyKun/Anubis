@@ -58,6 +58,7 @@ add_library(Anubis SHARED
   # hooks
   src/cheat/hooks/lists/createmove.cpp
   src/cheat/hooks/lists/fs_notify.cpp
+  src/cheat/hooks/lists/paint.cpp
   
   # features
   src/cheat/features/movement/movement.cpp
