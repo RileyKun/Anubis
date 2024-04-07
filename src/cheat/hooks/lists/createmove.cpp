@@ -3,6 +3,8 @@
 
 #include <safetyhook.hpp>
 
+#include <intrin.h>
+
 #include "movement/movement.hpp"
 
 SafetyHookInline c_move{};
