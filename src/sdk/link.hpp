@@ -17,7 +17,7 @@
 #include "shared/memory.hpp"
 
 
-// NOTE: Riley; For anyone reading this, a clean up of i_client_ent* needs to be done.
+// NOTE: Riley; For anyone reading this, a cleanup of i_client_ent* needs to be done.
 // While ripping interfaces straight out of the game would make things easier. I would like
 // Anubis to leave a smaller footprint in code size.
 class c_tf2 {
