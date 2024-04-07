@@ -15,6 +15,7 @@
 
 // include cheat headers
 #include "shared/memory.hpp"
+#include "shared/drawsystem/drawsystem.hpp"
 
 // NOTE: Riley; For anyone reading this, a cleanup of i_client_ent* needs to be done.
 // While ripping interfaces straight out of the game would make things easier. I would like
@@ -40,5 +41,6 @@ public:
   void get_local();
 };
 
+inline auto g_draw = std::make_unique<c_draw>();
 inline auto  ctx = std::make_unique<c_ctx>();
 inline c_tf2 g_tf2{};
