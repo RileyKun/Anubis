@@ -75,7 +75,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   )
   target_compile_options(Anubis PRIVATE
     /Od # disable optimizations
-    /MP
     /Zi # generate debug info, do not allow edit and continue
   )
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
@@ -85,7 +84,6 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
   )
   target_compile_options(Anubis PRIVATE
     /O2 # enable optimizations
-    /MP
     /Zi # Generate debug info, do not allow edit and continue
   )
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
@@ -94,7 +92,6 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     NDEBUG
   )
   target_compile_options(Anubis PRIVATE
-    /MP
     /O2
   )
 else()
