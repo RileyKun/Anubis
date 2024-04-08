@@ -46,6 +46,7 @@ add_library(Anubis SHARED
   src/factory/factory.cpp
   src/sdk/link.cpp
   src/sdk/shared/drawsystem/drawsystem.cpp
+  src/cheat/gui/watermark/watermark.cpp
   
   # game classes
   src/sdk/valve/netvars/netvars.cpp

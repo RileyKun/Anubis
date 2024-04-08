@@ -13,7 +13,7 @@ struct font_t {
 };
 
 enum e_fonts {
-  FONT_TEST,
+  FONT_WATERMARK,
   FONT_END,
 };
 
@@ -32,6 +32,4 @@ public:
   void rect(int x, int y, int w, int h, const color& col);
   void filled_rect(int x, int y, int w, int h, const color& col);
   std::array<font_t, FONT_END> fonts{};
-private:
-
 };

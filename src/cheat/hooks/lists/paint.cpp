@@ -5,6 +5,9 @@
 
 #include <mutex>
 
+// includes from features
+#include "../../gui/gui.hpp"
+
 SafetyHookInline pt{};
 SafetyHookInline size_change{};
 
@@ -31,8 +34,7 @@ void __fastcall hooks::paint::hooked_paint(void* ecx, void* edx, mode_t mode) {
   if(mode & mode_t::PAINT_UIPANELS) {
     g_tf2.surface->start();
     {
-      g_draw->string(g_draw->fonts[FONT_TEST], 20, 20, color(255, 255, 255, 255),
-                     e_text_align::TXT_LEFT, "Hello surface!");
+      gui::watermark->paint();
     }
     g_tf2.surface->stop();
   }
