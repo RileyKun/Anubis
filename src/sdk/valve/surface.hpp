@@ -2,7 +2,7 @@
 
 typedef unsigned long DWORD;
 
-enum FontDrawType_t : int {
+enum e_draw_type : int {
   FONT_DRAW_DEFAULT = 0,
   FONT_DRAW_NONADDITIVE,
   FONT_DRAW_ADDITIVE,
@@ -13,7 +13,7 @@ class color {
 public:
   int R, G, B, A;
 
-      color(int r, int g, int b, int a) {
+  color(int r, int g, int b, int a) {
     R = r;
     G = g;
     B = b;
@@ -31,7 +31,7 @@ public:
   void  draw_set_text_color(color col);
   void  draw_set_text_pos(int x, int y);
   void  draw_print_text(const wchar_t* text, int text_length,
-                        FontDrawType_t drawType = FONT_DRAW_DEFAULT);
+                        e_draw_type draw_type = FONT_DRAW_DEFAULT);
   void  get_text_size(DWORD font, const char* text, int& wide, int& tall);
   void  set_cursor_visible(bool visible);
   bool  is_cursor_visible(void);

@@ -35,9 +35,9 @@ void i_surface::draw_set_text_pos(int x, int y) {
   memory::find_vfunc<void(__thiscall*)(void*, int, int)>(this, 20u)(this, x, y);
 }
 
-void i_surface::draw_print_text(const wchar_t* text, int text_length, FontDrawType_t drawType) {
-  memory::find_vfunc<void(__thiscall*)(void*, const wchar_t*, int, FontDrawType_t)>(this, 22u)(
-      this, text, text_length, drawType);
+void i_surface::draw_print_text(const wchar_t* text, int text_length, e_draw_type draw_type) {
+  memory::find_vfunc<void(__thiscall*)(void*, const wchar_t*, int, e_draw_type)>(this, 22u)(
+      this, text, text_length, draw_type);
 }
 
 void i_surface::get_text_size(DWORD font, const char* text, int& wide, int& tall) {
