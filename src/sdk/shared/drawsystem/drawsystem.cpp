@@ -57,11 +57,14 @@ void c_draw::string(const font_t& font, int x, int y, const color& col, const e_
       break;
     }
   }
+
+  wchar_t wbuf[1024]{};
+  MultiByteToWideChar(CP_UTF8, 0, buf, strlen(buf), wbuf, sizeof(wbuf));
   
   g_tf2.surface->draw_set_text_pos(x, y);
   g_tf2.surface->draw_set_text_font(font.font);
   g_tf2.surface->draw_set_text_color(col);
-  g_tf2.surface->draw_print_text(buf, strlen(buf));
+  g_tf2.surface->draw_print_text(wbuf, wcslen(wbuf));
 }
 void c_draw::line(int x, int y, int w, int h, const color& col) {
 }
