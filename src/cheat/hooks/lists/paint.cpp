@@ -11,7 +11,7 @@ SafetyHookInline size_change{};
 std::once_flag   init;
 
 void             hooks::paint::startup() {
-  g_draw->reload_fonts(); // FIXME: Riley; WILL CRASH HERE.
+  g_draw->reload_fonts();
   pt = safetyhook::create_inline(memory::vfunc_ptr(g_tf2.engine_vgui, 14), hooked_paint);
   size_change =
       safetyhook::create_inline(memory::vfunc_ptr(g_tf2.surface, 111), hooked_size_changed);
@@ -31,8 +31,8 @@ void __fastcall hooks::paint::hooked_paint(void* ecx, void* edx, mode_t mode) {
   if(mode & mode_t::PAINT_UIPANELS) {
     g_tf2.surface->start();
     {
-      // g_draw->string(g_draw->fonts[FONT_TEST], 20, 20, color(255, 255, 255, 255),
-      // e_text_align::TXT_LEFT, "Hello surface!");
+      g_draw->string(g_draw->fonts[FONT_TEST], 20, 20, color(255, 255, 255, 255),
+                     e_text_align::TXT_LEFT, "Hello surface!");
     }
     g_tf2.surface->stop();
   }
