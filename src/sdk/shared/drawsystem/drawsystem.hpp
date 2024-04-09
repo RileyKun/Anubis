@@ -9,7 +9,7 @@ class color;
 struct font_t {
   DWORD       font = 0x0;
   const char* name = nullptr;
-  int         tall, weight, flags = 0;
+  int         tall{}, weight{}, flags{};
 };
 
 enum e_fonts {
