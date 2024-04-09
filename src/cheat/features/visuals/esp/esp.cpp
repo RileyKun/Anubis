@@ -7,9 +7,9 @@ void c_esp::run(c_tf_player* local) {
   if(!settings::visuals::esp::enabled)
     return;
   
-  int x, y, w, h;
+  rect_t bounds{};
   
-  for(int ent = 1; ent < g_tf2.entity_list->get_highest_ent_index() + 1; ent++) {
+  for(int ent = 1; ent <= g_tf2.entity_list->get_highest_ent_index(); ++ent) {
     i_client_entity* entity = g_tf2.entity_list->get_client_entity(ent);
     
     if(!entity || entity->is_dormant())
