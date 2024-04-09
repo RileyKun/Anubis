@@ -96,6 +96,7 @@ public:
 // ================
 // client_class.hpp
 // ================
+enum class e_class_ids;
 typedef void* (*CreateClientClassFn)(int entnum, int serialNum);
 typedef void* (*CreateEventFn)();
 class ClientClass {
@@ -106,4 +107,8 @@ public:
   RecvTable*          m_pRecvTable;
   ClientClass*        m_pNext;
   int                 m_ClassID; // Managed by the engine.
+  
+  e_class_ids get_tf_class() const {
+    return static_cast<e_class_ids>(m_ClassID);
+  }
 };
