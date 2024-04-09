@@ -30,6 +30,13 @@ void __fastcall hooks::paint::hooked_paint(void* ecx, void* edx, mode_t mode) {
   std::call_once(init, [&] {
     g_tf2.engine_client->get_screen_size(ctx->screen_width, ctx->screen_height);
   });
+  
+  c_view_setup view{};
+  
+  if(g_tf2.hl_client->get_player_view(view)) {
+    v_matrix w2v{}, w2p{}, w2pi{};
+    g_tf2.render_view->get_matrices_for_view(view, &w2v, &w2p, &ctx->matrix, &w2pi);
+  }
 
   if(mode & mode_t::PAINT_UIPANELS) {
     g_tf2.surface->start();
