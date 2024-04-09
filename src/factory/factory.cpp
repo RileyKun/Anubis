@@ -34,4 +34,5 @@ void c_factory::interfaces() {
   g_tf2.engine_vgui = memory::find_interface<c_engine_vgui*>("engine.dll", "VEngineVGui002");
   g_tf2.entity_list =
       memory::find_interface<i_client_entity_list*>("client.dll", "VClientEntityList003");
+  g_tf2.render_view = memory::find_interface<iv_render_view*>("engine.dll", "VEngineRenderView014");
 }
