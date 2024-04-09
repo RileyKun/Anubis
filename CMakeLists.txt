@@ -50,12 +50,14 @@ add_library(Anubis SHARED
   
   # game classes
   src/sdk/valve/netvars/netvars.cpp
+  src/sdk/valve/tf/c_base_entity.cpp
   
   # interface map outs
   src/sdk/valve/engine_client.cpp
   src/sdk/valve/hl_client.cpp
   src/sdk/valve/surface.cpp
   src/sdk/valve/engine_vgui.cpp
+  src/sdk/valve/render_view.cpp
   
   # hooks
   src/cheat/hooks/lists/createmove.cpp
@@ -64,6 +66,7 @@ add_library(Anubis SHARED
   
   # features
   src/cheat/features/movement/movement.cpp
+  src/cheat/features/visuals/esp/esp.cpp
 )
 
 # allow fast includes of sdk
