@@ -13,6 +13,7 @@
 
 // Team Fortress sdk headers
 #include "valve/tf/c_tf_player.hpp"
+#include "valve/tf/c_base_entity.hpp"
 
 // include cheat headers
 #include "shared/drawsystem/drawsystem.hpp"
