@@ -30,9 +30,8 @@ int c_netvars::get_offset(RecvTable* data_table, const char* var) {
 
     // credits: D3X
     if(prop->m_RecvType == DPT_DataTable) {
-      auto child_table = prop->m_pDataTable;
 
-      if(child_table) {
+      if(auto child_table = prop->m_pDataTable) {
         // this looks confusing here, should we clean it up?
         if(auto offset = get_offset(child_table, var)) {
           return offset + prop->m_Offset;

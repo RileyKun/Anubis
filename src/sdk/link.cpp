@@ -15,19 +15,19 @@ bool c_tf2::w2s(const vec3& origin, vec2& project) {
 
   if(width > 0.001f) {
     float inverted = 1.f / width;
-    project.x = ((float)ctx->screen_width * .5f) +
+    project.x = (static_cast<float>(ctx->screen_width) * .5f) +
                 (.5f *
                      ((matrix[0][0] * origin[0] + matrix[0][1] * origin[1] +
                        matrix[0][2] * origin[2] + matrix[0][3]) *
                       inverted) *
-                     (float)ctx->screen_width +
+                     static_cast<float>(ctx->screen_width) +
                  .5f);
-    project.y = ((float)ctx->screen_height * .5f) -
+    project.y = (static_cast<float>(ctx->screen_height) * .5f) -
                 (.5f *
                      ((matrix[1][0] * origin[0] + matrix[1][1] * origin[1] +
                        matrix[1][2] * origin[2] + matrix[1][3]) *
                       inverted) *
-                     (float)ctx->screen_height +
+                     static_cast<float>(ctx->screen_height) +
                  .5f);
     return true;
   }
