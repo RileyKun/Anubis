@@ -2,7 +2,7 @@
 
 #include "link.hpp"
 
-void i_surface::draw_set_color(const color& col) {
+void i_surface::draw_set_color(color col) {
   memory::find_vfunc<void(__thiscall*)(void*, int, int, int, int)>(this, 11u)(this, col.R, col.G,
                                                                               col.B, col.A);
 }
@@ -26,7 +26,7 @@ void i_surface::draw_set_text_font(DWORD font) {
   memory::find_vfunc<void(__thiscall*)(void*, DWORD)>(this, 17u)(this, font);
 }
 
-void i_surface::draw_set_text_color(const color& col) {
+void i_surface::draw_set_text_color(color col) {
   memory::find_vfunc<void(__thiscall*)(void*, int, int, int, int)>(this, 19u)(this, col.R, col.G,
                                                                               col.B, col.A);
 }

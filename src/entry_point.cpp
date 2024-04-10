@@ -13,7 +13,7 @@ DWORD __stdcall entry(void* arg) {
 
   factory->shutdown();
 
-  FreeLibraryAndExitThread(static_cast<HMODULE>(arg), 0);
+  FreeLibraryAndExitThread((HMODULE)arg, 0);
 }
 
 DWORD __stdcall exit() {
