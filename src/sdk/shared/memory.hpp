@@ -72,7 +72,7 @@ inline T find_pattern(const char* module, const char* pattern) {
       return {};
 
     std::vector<i32> pattern_bytes = sig2byte(pattern);
-    u8*              scan = (u8*)handle;
+    u8*              scan = reinterpret_cast<u8*>(handle);
 
     u32              size = pattern_bytes.size();
     i32*             data = pattern_bytes.data();

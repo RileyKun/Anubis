@@ -12,11 +12,11 @@ constexpr double              PI = 3.1415926535897932384;
 constexpr double              TAU = PI * 2;
 
 __forceinline constexpr float deg2rad(float value) {
-  return value * (float)((double)PI / 180);
+  return value * static_cast<float>(static_cast<double>(PI) / 180);
 }
 
 __forceinline constexpr float rad2deg(float value) {
-  return value * (float)(180. / (double)PI);
+  return value * static_cast<float>(180. / static_cast<double>(PI));
 }
 
 struct rect_t {
@@ -156,21 +156,21 @@ public:
     return *this;
   }
 
-  vec2_t operator+(const vec2_t& v) const { return vec2_t(x + v.x, y + v.y); }
+  vec2_t operator+(const vec2_t& v) const { return {x + v.x, y + v.y}; }
 
-  vec2_t operator-(const vec2_t& v) const { return vec2_t(x - v.x, y - v.y); }
+  vec2_t operator-(const vec2_t& v) const { return {x - v.x, y - v.y}; }
 
-  vec2_t operator*(const vec2_t& v) const { return vec2_t(x * v.x, y * v.y); }
+  vec2_t operator*(const vec2_t& v) const { return {x * v.x, y * v.y}; }
 
-  vec2_t operator/(const vec2_t& v) const { return vec2_t(x / v.x, y / v.y); }
+  vec2_t operator/(const vec2_t& v) const { return {x / v.x, y / v.y}; }
 
-  vec2_t operator+(float v) const { return vec2_t(x + v, y + v); }
+  vec2_t operator+(float v) const { return {x + v, y + v}; }
 
-  vec2_t operator-(float v) const { return vec2_t(x - v, y - v); }
+  vec2_t operator-(float v) const { return {x - v, y - v}; }
 
-  vec2_t operator*(float v) const { return vec2_t(x * v, y * v); }
+  vec2_t operator*(float v) const { return {x * v, y * v}; }
 
-  vec2_t operator/(float v) const { return vec2_t(x / v, y / v); }
+  vec2_t operator/(float v) const { return {x / v, y / v}; }
 
   void   set(float X = 0.0f, float Y = 0.0f) {
     x = X;
@@ -244,7 +244,7 @@ public:
     return *this;
   }
 
-  float&              operator[](int i) { return ((float*)this)[i]; }
+  float&              operator[](int i) { return reinterpret_cast<float*>(this)[i]; }
 
   __forceinline float operator[](int i) const { return ((float*)this)[i]; }
 
@@ -305,28 +305,28 @@ public:
   }
 
   __forceinline vec3_t operator+(const vec3_t& v) const {
-    return vec3_t(x + v.x, y + v.y, z + v.z);
+    return {x + v.x, y + v.y, z + v.z};
   }
 
   __forceinline vec3_t operator-(const vec3_t& v) const {
-    return vec3_t(x - v.x, y - v.y, z - v.z);
+    return {x - v.x, y - v.y, z - v.z};
   }
 
   __forceinline vec3_t operator*(const vec3_t& v) const {
-    return vec3_t(x * v.x, y * v.y, z * v.z);
+    return {x * v.x, y * v.y, z * v.z};
   }
 
   __forceinline vec3_t operator/(const vec3_t& v) const {
-    return vec3_t(x / v.x, y / v.y, z / v.z);
+    return {x / v.x, y / v.y, z / v.z};
   }
 
-  __forceinline vec3_t operator+(float v) const { return vec3_t(x + v, y + v, z + v); }
+  __forceinline vec3_t operator+(float v) const { return {x + v, y + v, z + v}; }
 
-  __forceinline vec3_t operator-(float v) const { return vec3_t(x - v, y - v, z - v); }
+  __forceinline vec3_t operator-(float v) const { return {x - v, y - v, z - v}; }
 
-  __forceinline vec3_t operator*(float v) const { return vec3_t(x * v, y * v, z * v); }
+  __forceinline vec3_t operator*(float v) const { return {x * v, y * v, z * v}; }
 
-  __forceinline vec3_t operator/(float v) const { return vec3_t(x / v, y / v, z / v); }
+  __forceinline vec3_t operator/(float v) const { return {x / v, y / v, z / v}; }
 
   __forceinline float  length() const { return sqrtf(x * x + y * y + z * z); }
 
@@ -438,7 +438,7 @@ public:
     return angles;
   }
 
-  __forceinline float fov_to(vec3_t to) {
+  __forceinline float fov_to(const vec3_t& to) {
     vec3_t v_src = vec3_t();
     angle_vectors(&v_src);
 
@@ -454,7 +454,7 @@ public:
   }
 
   vec3_t cross(const vec3_t& v) const {
-    return vec3_t(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
+    return {y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x};
   }
 
   bool is_zero() const {

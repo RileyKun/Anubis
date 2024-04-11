@@ -33,6 +33,7 @@ void c_esp::run(c_tf_player* local) {
         
         
       }
+      default: break;
     }
   }
 }

@@ -4,7 +4,7 @@
 
 class v_matrix {
 public:
-  const matrix3x4& as_3x4() { return *((const matrix3x4*)this); }
+  const matrix3x4& as_3x4() { return *reinterpret_cast<const matrix3x4*>(this); }
   vec3             m[4][4];
 };
 

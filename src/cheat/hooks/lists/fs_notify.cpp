@@ -30,5 +30,6 @@ void __fastcall hooks::fs_notify::hooked_fs_notify(void* ecx, void* edx, frame_s
     }
     case FRAME_START:
       break;
+    default: break;
   }
 }
