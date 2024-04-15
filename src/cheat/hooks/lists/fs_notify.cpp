@@ -6,7 +6,6 @@
 
 SafetyHookInline fs{};
 
-// i also blame clang-format for this
 void             hooks::fs_notify::startup() {
   fs = safetyhook::create_inline(memory::vfunc_ptr(g_tf2.hl_client, 35), hooked_fs_notify);
 }
@@ -29,7 +28,7 @@ void __fastcall hooks::fs_notify::hooked_fs_notify(void* ecx, void* edx, frame_s
       break;
     }
     case FRAME_START:
+    case FRAME_UNDEFINED:
       break;
-    default: break;
   }
 }

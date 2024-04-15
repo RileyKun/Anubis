@@ -9,7 +9,6 @@
 
 SafetyHookInline c_move{};
 
-// i blame clang format for this right here
 void             hooks::createmove::startup() {
   c_move = safetyhook::create_inline(memory::vfunc_ptr(g_tf2.client_mode, 21), hooked_createmove);
 }

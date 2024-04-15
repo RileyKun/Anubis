@@ -1,11 +1,10 @@
 #pragma once
 
-class c_user_cmd;
-class c_tf_player;
+#include "link.hpp"
 
 class c_movement {
 private:
-  void bunnyhop(c_tf_player* player, c_user_cmd* cmd);
+  void bunnyhop(c_player* player, c_user_cmd* cmd);
 
 public:
   void run(c_user_cmd* cmd);

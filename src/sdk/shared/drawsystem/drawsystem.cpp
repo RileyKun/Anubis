@@ -21,6 +21,7 @@ enum font_flags {
 void c_draw::reload_fonts() {
   // set up fonts
   fonts[FONT_WATERMARK] = {0x0, "Segoe UI", 18, 0, FONTFLAG_ANTIALIAS | FONTFLAG_OUTLINE};
+  fonts[FONT_ESP] = {0x0, "DroidSans", 16, 0, FONTFLAG_OUTLINE};
 
   // iterate through fonts and create them in surface
   for(auto& cur_font : fonts) {

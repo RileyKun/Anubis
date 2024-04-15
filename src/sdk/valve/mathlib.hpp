@@ -20,7 +20,7 @@ __forceinline constexpr float rad2deg(float value) {
 }
 
 struct rect_t {
-  int x, y, z, h;
+  int x, y, w, h;
 };
 
 using matrix3x4 = float[3][4];

@@ -12,8 +12,7 @@
 #include "valve/user_cmd.hpp"
 
 // Team Fortress sdk headers
-#include "valve/tf/c_tf_player.hpp"
-#include "valve/tf/c_base_entity.hpp"
+#include "valve/tf/c_entity.hpp"
 
 // include cheat headers
 #include "shared/drawsystem/drawsystem.hpp"
@@ -38,7 +37,7 @@ public:
 
 class c_ctx {
 public:
-  c_tf_player* local_player = nullptr;
+  c_player* local_player = nullptr;
 
   int          screen_width = 0;
   int          screen_height = 0;

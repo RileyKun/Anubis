@@ -14,6 +14,8 @@ struct font_t {
 
 enum e_fonts {
   FONT_WATERMARK,
+  FONT_ESP,
+
   FONT_END,
 };
 

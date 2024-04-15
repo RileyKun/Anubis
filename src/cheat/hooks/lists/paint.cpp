@@ -7,6 +7,7 @@
 
 // includes from features
 #include "../../gui/gui.hpp"
+#include "../../features/visuals/visuals.hpp"
 
 SafetyHookInline pt{};
 SafetyHookInline size_change{};
@@ -39,9 +40,13 @@ void __fastcall hooks::paint::hooked_paint(void* ecx, void* edx, mode_t mode) {
   }
 
   if(mode & mode_t::PAINT_UIPANELS) {
+
     g_tf2.surface->start();
     {
       gui::watermark->paint();
+      if(ctx->local_player){
+        f::esp.run();
+      }
     }
     g_tf2.surface->stop();
   }
