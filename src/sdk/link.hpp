@@ -15,7 +15,6 @@
 #include "valve/tf/c_entity.hpp"
 
 // include cheat headers
-#include "shared/drawsystem/drawsystem.hpp"
 #include "shared/memory.hpp"
 
 // NOTE: Riley; For anyone reading this, a cleanup of i_client_ent* needs to be done.
@@ -47,6 +46,5 @@ public:
   void         get_local();
 };
 
-inline auto  g_draw = std::make_unique<c_draw>();
 inline auto  ctx = std::make_unique<c_ctx>();
 inline c_tf2 g_tf2{};
