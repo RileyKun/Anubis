@@ -29,8 +29,7 @@ void c_factory::interfaces() {
   g_tf2.hl_client = memory::find_interface<c_hl_client*>("client.dll", "VClient017");
   g_tf2.engine_client = memory::find_interface<c_engine_client*>("engine.dll", "VEngineClient013");
   g_tf2.surface = memory::find_interface<i_surface*>("vguimatsurface.dll", "VGUI_Surface030");
-  g_tf2.client_mode = **memory::find_pattern<i_client_mode_shared***, 2u>(
-      "client.dll", "8B 0D ? ? ? ? 8B 02 D9 05");
+  g_tf2.client_mode = **memory::find_pattern<i_client_mode_shared***, 2u>("client.dll", "8B 0D ? ? ? ? FF 96 ? ? ? ? 8B 4D");
   g_tf2.engine_vgui = memory::find_interface<c_engine_vgui*>("engine.dll", "VEngineVGui002");
   g_tf2.entity_list =
       memory::find_interface<i_client_entity_list*>("client.dll", "VClientEntityList003");
