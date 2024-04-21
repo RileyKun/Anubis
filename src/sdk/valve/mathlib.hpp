@@ -26,18 +26,6 @@ struct rect_t {
 using matrix3x4 = float[3][4];
 
 namespace math {
-inline void sine_cosine(float radians, float* sine, float* cosine) {
-  __asm {
-			fld DWORD PTR[ radians ]
-			fsincos
-
-			mov edx, DWORD PTR[ cosine ]
-			mov eax, DWORD PTR[ sine ]
-
-			fstp DWORD PTR[ edx ]
-			fstp DWORD ptr[ eax ]
-  }
-}
 
 inline void sine_cosine(const float& radians, float& sine, float& cosine) {
   sine = sin(radians);
@@ -346,8 +334,8 @@ public:
     auto  out = vec3_t();
     float sp, sy, cp, cy;
 
-    math::sine_cosine(deg2rad(x), &sp, &cp);
-    math::sine_cosine(deg2rad(y), &sy, &cy);
+    math::sine_cosine(deg2rad(x), sp, cp);
+    math::sine_cosine(deg2rad(y), sy, cy);
 
     out.x = cp * cy;
     out.y = cp * sy;
@@ -359,8 +347,8 @@ public:
   inline void angle_vectors(vec3_t* forward) const {
     float sp, sy, cp, cy;
 
-    math::sine_cosine(deg2rad(x), &sp, &cp);
-    math::sine_cosine(deg2rad(y), &sy, &cy);
+    math::sine_cosine(deg2rad(x), sp, cp);
+    math::sine_cosine(deg2rad(y), sy, cy);
 
     if(forward) {
       forward->x = cp * cy;
@@ -400,9 +388,9 @@ public:
 
   inline void angle_vectors(vec3_t* forward, vec3_t* right, vec3_t* up) const {
     float sr, sp, sy, cr, cp, cy;
-    math::sine_cosine(deg2rad(x), &sp, &cp);
-    math::sine_cosine(deg2rad(y), &sy, &cy);
-    math::sine_cosine(deg2rad(z), &sr, &cr);
+    math::sine_cosine(deg2rad(x), sp, cp);
+    math::sine_cosine(deg2rad(y), sy, cy);
+    math::sine_cosine(deg2rad(z), sr, cr);
 
     if(forward) {
       forward->x = cp * cy;
