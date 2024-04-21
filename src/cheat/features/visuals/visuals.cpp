@@ -34,7 +34,7 @@ void c_esp::run() {
       if(!get_bounds(entity, x, y, w, h)) {
 
         const int draw_x = x + (w / 2);
-        int draw_y = y + (h / 2);
+        int       draw_y = y + (h / 2);
         g_draw_threaded.string(nullptr, draw_x, draw_y, true, e_text_align::TEXT_LEFT,
                                ImColor(1.f, 1.f, 1.f, 1.f), "Player");
       }

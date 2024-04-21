@@ -24,6 +24,7 @@ void __fastcall hooks::fs_notify::hooked_fs_notify(void* ecx, void* edx, frame_s
       if(!ctx->screen_width || !ctx->screen_height) // drawsystem hasn't initialized, don't bother
         break;
 
+      ctx->get_render_state();
       g_tf2.update_w2s();
 
       if(g_tf2.engine_client->is_connected()) {
