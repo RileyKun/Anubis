@@ -3,6 +3,9 @@
 #include "../config.hpp"
 
 void c_movement::bunnyhop(c_player* player, c_user_cmd* cmd) {
+  if(!settings::movement::bunny_hop)
+    return;
+
   int         flags = player->flags();
   int&        buttons = cmd->buttons;
   static bool jump_state = false;
@@ -23,6 +26,5 @@ void c_movement::run(c_user_cmd* cmd) {
   if(ctx->local_player->is_dead())
     return;
 
-  if(settings::movement::bunny_hop)
-    bunnyhop(ctx->local_player, cmd);
+  bunnyhop(ctx->local_player, cmd);
 }
