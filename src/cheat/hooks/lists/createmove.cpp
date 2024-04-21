@@ -31,7 +31,7 @@ bool __fastcall hooks::createmove::hooked_createmove(void* ecx, void* edx, float
   
   auto bp = reinterpret_cast<uintptr_t>(_AddressOfReturnAddress()) - sizeof(void*);
   bool& b_send_packet = *reinterpret_cast<bool*>(***reinterpret_cast<uintptr_t***>(bp) - 0x1);
-  
+
   if(ctx->local_player) {
     f::movement.run(cmd);
   }

@@ -1,8 +1,9 @@
 #include "../hooks.hpp"
 
 #include "link.hpp"
-
 #include <safetyhook.hpp>
+
+#include "../../gui/gui.hpp"
 
 SafetyHookInline fs{};
 
@@ -17,7 +18,15 @@ void hooks::fs_notify::shutdown() {
 void __fastcall hooks::fs_notify::hooked_fs_notify(void* ecx, void* edx, frame_stage stage) {
   fs.thiscall<void>(ecx, stage);
   switch(stage) {
-    case FRAME_RENDER_START:
+    case FRAME_RENDER_START: {
+      if(!ctx->screen_width || !ctx->screen_height) // drawsystem hasn't initialized, don't bother
+        break;
+
+      gui::watermark->paint();
+
+      g_draw_threaded.flush();
+      break;
+    }
     case FRAME_RENDER_END:
     case FRAME_NET_UPDATE_START:
     case FRAME_NET_UPDATE_END:

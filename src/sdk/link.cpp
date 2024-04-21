@@ -2,9 +2,18 @@
 
 // cleans up frame_stage_notify
 void c_ctx::get_local() {
-  local_player = g_tf2.entity_list->get_client_entity(g_tf2.engine_client->get_local_player())
-                     ->as<c_player>();
+  local_player =
+      g_tf2.entity_list->get_client_entity(g_tf2.engine_client->get_local_player())->as<c_player>();
 }
+
+bool c_ctx::get_render_state() {
+  return this->do_optimized_render;
+}
+
+void c_ctx::set_render_state(bool state) {
+  this->do_optimized_render = state;
+}
+
 // credits: JAGNEmk
 bool c_tf2::w2s(const vec3& origin, vec2& project) {
   // NOTE: Riley; Must be made const.

@@ -15,6 +15,7 @@
 #include "valve/tf/c_entity.hpp"
 
 // include cheat headers
+#include "shared/drawsystem/drawsystem.hpp"
 #include "shared/memory.hpp"
 
 // NOTE: Riley; For anyone reading this, a cleanup of i_client_ent* needs to be done.
@@ -38,13 +39,22 @@ class c_ctx {
 public:
   c_player* local_player = nullptr;
 
-  int          screen_width = 0;
-  int          screen_height = 0;
+  int       screen_width = 0;
+  int       screen_height = 0;
 
-  v_matrix     matrix = {};
+  v_matrix  matrix = {};
 
-  void         get_local();
+  void      get_local();
+  // returns true if we should do an optimized render
+  bool      get_render_state();
+  void      set_render_state(bool state);
+
+private:
+  bool do_optimized_render = false;
 };
 
 inline auto  ctx = std::make_unique<c_ctx>();
 inline c_tf2 g_tf2{};
+inline auto  drawsystem = std::make_unique<c_drawsystem>();
+inline auto  g_draw = std::make_unique<c_render>(); // <- because that could confuse people
+inline c_render_threaded g_draw_threaded{}; // <- NOTE: Riley; this should probably get renamed

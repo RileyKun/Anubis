@@ -7,6 +7,8 @@
 
 #include "link.hpp"
 
+#include "../../gui/gui.hpp"
+
 std::once_flag has_init;
 
 template <typename T> using com_ptr = Microsoft::WRL::ComPtr<T>;
@@ -53,6 +55,22 @@ void hooks::directx::shutdown() {
 HRESULT __stdcall hooks::directx::hooked_present(IDirect3DDevice9* device, const RECT* src,
                                                  const RECT* dest, HWND window,
                                                  const RGNDATA* dirty) {
+  std::call_once(has_init, [&] {
+    g_tf2.engine_client->get_screen_size(ctx->screen_width, ctx->screen_height);
+
+    D3DDEVICE_CREATION_PARAMETERS params{};
+    device->GetCreationParameters(&params);
+
+    drawsystem->initialize(device, params.hFocusWindow);
+  });
+
+  drawsystem->start_paint(device);
+  {
+    auto* list = ImGui::GetBackgroundDrawList();
+
+    g_draw_threaded.paint_traverse(list);
+  }
+  drawsystem->finish_paint(device);
   // Drawing is finished, call original.
   return present.stdcall<HRESULT>(device, src, dest, window, dirty);
 }
