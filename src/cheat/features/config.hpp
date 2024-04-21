@@ -3,7 +3,8 @@
 namespace settings {
 
 namespace esp {
-inline bool enabled = false;
+inline bool esp_enabled = true;
+inline bool draw_players = true;
 }
 
 namespace movement {

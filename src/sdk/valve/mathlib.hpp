@@ -488,6 +488,15 @@ public:
   }
 };
 
+namespace mathex {
+  inline void vector_transform(const vec3_t& input, const matrix3x4& matrix, vec3_t& output){
+    for(auto i = 0; i < 3; ++i) {
+      output[i] = input.dot((vec3_t&)matrix[i]) + matrix[i][3];
+    }
+  }
+
+}
+
 using QAngle = vec3_t;
 using vec3 = vec3_t;
 using vec2 = vec2_t;

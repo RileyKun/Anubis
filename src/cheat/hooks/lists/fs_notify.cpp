@@ -5,6 +5,8 @@
 
 #include "../../gui/gui.hpp"
 
+#include "visuals/visuals.hpp"
+
 SafetyHookInline fs{};
 
 void             hooks::fs_notify::startup() {
@@ -21,6 +23,16 @@ void __fastcall hooks::fs_notify::hooked_fs_notify(void* ecx, void* edx, frame_s
     case FRAME_RENDER_START: {
       if(!ctx->screen_width || !ctx->screen_height) // drawsystem hasn't initialized, don't bother
         break;
+
+      g_tf2.update_w2s();
+
+      if(g_tf2.engine_client->is_connected()) {
+
+        if(ctx->local_player) {
+          f::esp.run();
+        }
+
+      }
 
       gui::watermark->paint();
 

@@ -15,6 +15,7 @@
 #include "valve/tf/c_entity.hpp"
 
 // include cheat headers
+#include "shared/console/console.hpp"
 #include "shared/drawsystem/drawsystem.hpp"
 #include "shared/memory.hpp"
 
@@ -32,7 +33,8 @@ public:
   i_client_entity_list* entity_list = nullptr;
   iv_render_view*       render_view = nullptr;
   //
-  static bool           w2s(const vec3& origin, vec2& project);
+  bool           w2s(const vec3& origin, vec3& project);
+  void update_w2s();
 };
 
 class c_ctx {
@@ -55,6 +57,7 @@ private:
 
 inline auto  ctx = std::make_unique<c_ctx>();
 inline c_tf2 g_tf2{};
+inline auto  g_console = std::make_unique<c_console>();
 inline auto  drawsystem = std::make_unique<c_drawsystem>();
 inline auto  g_draw = std::make_unique<c_render>(); // <- because that could confuse people
 inline c_render_threaded g_draw_threaded{}; // <- NOTE: Riley; this should probably get renamed

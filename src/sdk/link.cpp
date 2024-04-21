@@ -15,30 +15,44 @@ void c_ctx::set_render_state(bool state) {
 }
 
 // credits: JAGNEmk
-bool c_tf2::w2s(const vec3& origin, vec2& project) {
-  // NOTE: Riley; Must be made const.
-  const matrix3x4& matrix = ctx->matrix.as_3x4();
+bool c_tf2::w2s(const vec3& origin, vec3& project) {
+  const matrix3x4& w2s = ctx->matrix.as_3x4();
 
-  float            width =
-      matrix[3][0] * origin[0] + matrix[3][1] * origin[1] + matrix[3][2] * origin[2] + matrix[3][3];
+  float w = w2s[3][0] * origin[0] + w2s[3][1] * origin[1] + w2s[3][2] * origin[2] + w2s[3][3];
 
-  if(width > 0.001f) {
-    float inverted = 1.f / width;
-    project.x = (static_cast<float>(ctx->screen_width) * .5f) +
-                (.5f *
-                     ((matrix[0][0] * origin[0] + matrix[0][1] * origin[1] +
-                       matrix[0][2] * origin[2] + matrix[0][3]) *
-                      inverted) *
-                     static_cast<float>(ctx->screen_width) +
-                 .5f);
-    project.y = (static_cast<float>(ctx->screen_height) * .5f) -
-                (.5f *
-                     ((matrix[1][0] * origin[0] + matrix[1][1] * origin[1] +
-                       matrix[1][2] * origin[2] + matrix[1][3]) *
-                      inverted) *
-                     static_cast<float>(ctx->screen_height) +
-                 .5f);
+  if(w > 0.001f) {
+    auto width = static_cast<float>(ctx->screen_width);
+    auto height = static_cast<float>(ctx->screen_height);
+    float dbw = 1.0f / w;
+
+    project.x =
+        (width / 2.0f) +
+        (0.5f *
+             ((w2s[0][0] * origin[0] + w2s[0][1] * origin[1] + w2s[0][2] * origin[2] + w2s[0][3]) *
+              dbw) *
+             width +
+         0.5f);
+    project.y =
+        (height / 2.0f) -
+        (0.5f *
+             ((w2s[1][0] * origin[0] + w2s[1][1] * origin[1] + w2s[1][2] * origin[2] + w2s[1][3]) *
+              dbw) *
+             height +
+         0.5f);
+
     return true;
   }
   return false;
+}
+
+void c_tf2::update_w2s() {
+  c_view_setup view_setup{};
+
+  if(g_tf2.hl_client->get_player_view(view_setup)) {
+    v_matrix w2v{};
+    v_matrix w2p{};
+    v_matrix w2px{};
+
+    g_tf2.render_view->get_matrices_for_view(view_setup, &w2v, &w2p, &ctx->matrix, &w2px);
+  }
 }
