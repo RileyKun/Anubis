@@ -9,7 +9,7 @@ void c_watermark::paint() {
   if(g_tf2.engine_client->is_in_game())
     return;
 #ifdef _DEBUG
-  g_draw_threaded.string(nullptr, 10, ctx->screen_height - 20, true, e_text_align::TEXT_LEFT,
+  g_draw_threaded.string(nullptr, 8, ctx->screen_height - 20, true, e_text_align::TEXT_LEFT,
                          ImColor(1.f, 0.f, 0.f, 0.35f), "Developer build.");
 #else
   g_draw_threaded.string(nullptr, 8, ctx->screen_height - 20, true, e_text_align::TEXT_LEFT,
