@@ -16,7 +16,7 @@ __forceinline constexpr float deg2rad(float value) {
 }
 
 __forceinline constexpr float rad2deg(float value) {
-  return value * static_cast<float>(180. / static_cast<double>(PI));
+  return value * static_cast<float>(180.f / static_cast<double>(PI));
 }
 
 struct rect_t {
