@@ -12,7 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Include CPM
 include(CPM.cmake)
 
-# TODO: Riley; add imgui
+CPMAddPackage("gh:ocornut/imgui@1.90.5")
 CPMAddPackage("gh:cursey/safetyhook@0.4.1")
 # manual configuration required
 CPMAddPackage(
@@ -50,6 +50,26 @@ add_library(Anubis SHARED
   # features
   src/cheat/features/movement/movement.cpp
 )
+
+if(imgui_ADDED)
+  target_sources(Anubis PRIVATE
+    ${imgui_SOURCE_DIR}/imgui.cpp
+    ${imgui_SOURCE_DIR}/imgui_draw.cpp
+    ${imgui_SOURCE_DIR}/imgui_tables.cpp
+    ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_win32.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_dx9.cpp
+  )
+
+  target_include_directories(Anubis PUBLIC
+    $<BUILD_INTERFACE:${imgui_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${imgui_SOURCE_DIR}/backends>)
+
+  target_compile_definitions(Anubis PUBLIC
+    "IMGUI_USER_CONFIG=\"${CMAKE_SOURCE_DIR}/src/sdk/shared/drawsystem/imconfig.hpp\""
+    IMGUI_IMPL_WIN32_DISABLE_GAMEPAD
+  )
+endif()
 
 # allow fast includes of sdk
 target_include_directories(Anubis PRIVATE src/sdk)
