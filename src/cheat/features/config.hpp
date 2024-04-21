@@ -2,15 +2,9 @@
 
 namespace settings {
 
-namespace visuals {
-
 namespace esp {
-inline bool enabled = true;
-inline bool draw_players = true;
-inline bool draw_buildings = true;
-} // namespace esp
-
-} // namespace visuals
+inline bool enabled = false;
+}
 
 namespace movement {
 inline bool bunny_hop = true;
