@@ -3,9 +3,8 @@
 #include "factory/factory.hpp"
 
 DWORD __stdcall entry(void* arg) {
-  // FIXME: Riley; We need to figure out what the new final module is.
-  //while(!GetModuleHandleA("mss32.dll"))
-  //  Sleep(150);
+  while(!GetModuleHandleA("GameUI.dll"))
+    Sleep(150);
 
   factory->startup();
 

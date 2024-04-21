@@ -17,10 +17,12 @@ void c_factory::hooks(bool startup) {
     hooks::createmove::startup();
     hooks::fs_notify::startup();
     hooks::directx::startup();
+    hooks::paint::startup();
   } else {
     hooks::createmove::shutdown();
     hooks::fs_notify::shutdown();
     hooks::directx::shutdown();
+    hooks::paint::startup();
   }
 }
 
