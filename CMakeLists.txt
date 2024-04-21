@@ -30,8 +30,9 @@ add_library(Anubis SHARED
   src/factory/factory.cpp
   src/sdk/link.cpp
   src/sdk/shared/drawsystem/drawsystem.cpp
+  src/sdk/shared/console/console.cpp
   src/cheat/gui/watermark/watermark.cpp
-  
+
   # game classes
   src/sdk/valve/netvars/netvars.cpp
   src/sdk/valve/tf/c_entity.cpp
@@ -50,6 +51,7 @@ add_library(Anubis SHARED
   
   # features
   src/cheat/features/movement/movement.cpp
+  src/cheat/features/visuals/visuals.cpp
 )
 
 if(imgui_ADDED)
