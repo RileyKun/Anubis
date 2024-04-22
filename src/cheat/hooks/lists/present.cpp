@@ -80,6 +80,10 @@ void hooks::paint::startup() {
   size = safetyhook::create_inline(memory::vfunc_ptr(g_tf2.surface, 111), hooked_size_changed);
 }
 
+void hooks::paint::shutdown() {
+  size = {};
+}
+
 void hooks::paint::hooked_size_changed(void* ecx, void* edx, int old_width, int old_height) {
   directx::shutdown();
   size.thiscall<void>(ecx, old_width, old_height);

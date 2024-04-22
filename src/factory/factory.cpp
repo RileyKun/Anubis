@@ -50,7 +50,7 @@ void c_factory::hooks(bool startup) {
     hooks::createmove::shutdown();
     hooks::fs_notify::shutdown();
     hooks::directx::shutdown();
-    hooks::paint::startup();
+    hooks::paint::shutdown();
   }
 }
 
