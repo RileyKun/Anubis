@@ -1,5 +1,7 @@
 @echo off
 
+call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
+
 if not exist build\ (
   mkdir build
 )
@@ -7,7 +9,7 @@ if not exist build\ (
 cd build
 
 if not exist CMakeFiles\ (
-  cmake -G "Visual Studio 17 2022" ..
+  cmake -G "Ninja" ..
 )
 
 cmake --build .
