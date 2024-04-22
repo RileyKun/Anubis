@@ -24,6 +24,8 @@ void c_esp::run() {
       if(entity == ctx->local_player)
         continue;
 
+
+
       int x{}, y{}, w{}, h{};
 
       // FIXME: Riley; There is currently an issue where all "Player" texts only originate
@@ -31,7 +33,7 @@ void c_esp::run() {
       // IClient virtual method tables being out of date. As stepping through the get_bounds()
       // function with a debugger results in us never hitting CTFPlayer as our class.
       // If anyone can figure it out, please make a PR!
-      if(!get_bounds(entity, x, y, w, h)) {
+      if(get_bounds(entity, x, y, w, h)) {
 
         const int draw_x = x + (w / 2);
         int       draw_y = y + (h / 2);
@@ -51,8 +53,9 @@ bool c_esp::get_bounds(c_entity* entity, int& x, int& y, int& w, int& h) {
   auto& trans = const_cast<matrix3x4&>(entity->renderable_to_world_transform());
 
   bool  is_player = false;
+  ClientClass* c_class = entity->get_client_class();
 
-  switch(entity->get_class_id()) {
+  switch(c_class->get_class()) {
     case e_class_ids::CTFPlayer: {
       is_player = true;
       vec_mins = entity->mins();
