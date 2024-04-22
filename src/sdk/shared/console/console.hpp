@@ -20,14 +20,14 @@ enum class e_icon_type : u16 {
 
 class c_console {
 public:
-  void print(e_icon_type icon_type, std::string_view input, ...)noexcept;
-  void spawn(std::string_view window)noexcept;
-  void kill()noexcept;
+  void               print(e_icon_type icon_type, std::string_view input, ...) noexcept;
+  void               spawn(std::string_view window) noexcept;
+  void               kill() noexcept;
   [[nodiscard]] bool get_visible() const noexcept;
 
 private:
-  bool        is_open = false;
-  std::string title{};
+  bool               is_open = false;
+  std::string        title{};
   static std::string icon(e_icon_type icon) noexcept;
-  void        set_color(e_icon_type col);
+  void               set_color(e_icon_type col);
 };
