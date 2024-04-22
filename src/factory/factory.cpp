@@ -15,6 +15,20 @@ void c_factory::startup() {
   g_console->print(e_icon_type::CON_OK, "Hooks started!");
 
   g_console->print(e_icon_type::CON_OK, "Cheat initialized!");
+  Sleep(150);
+
+  // DO NOT MODIFY.
+  g_console->print(e_icon_type::CON_WARN, "Anubis is free and open source software licensed under");
+  Sleep(5);
+  g_console->print(e_icon_type::CON_WARN, "the GNU-GPL. If you have paid for this software, or");
+  Sleep(5);
+  g_console->print(e_icon_type::CON_WARN, "have obtained it from an outside source that is not");
+  Sleep(5);
+  g_console->print(e_icon_type::CON_WARN, "from the GitHub directly, you have been scammed.");
+  Sleep(5);
+  g_console->print(e_icon_type::CON_WARN, "https://github.com/RileyKun/Anubis");
+  Sleep(5);
+  g_console->print(e_icon_type::CON_WARN, "Copyright (C) 2024 RileyKun - GNU-GPL v3.0");
 }
 
 void c_factory::shutdown() {
