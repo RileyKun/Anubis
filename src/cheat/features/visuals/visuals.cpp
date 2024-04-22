@@ -11,34 +11,47 @@ void c_esp::run() {
 
   for(auto entidx = 1; entidx <= g_tf2.entity_list->get_highest_ent_index(); ++entidx) {
     if(auto ent = g_tf2.entity_list->get_client_entity(entidx)) {
-      if(ent->is_dormant()) // entity is dormant, skip over it
+      if(!ent || ent->is_dormant()) // entity is dormant, skip over it
         continue;
 
-      auto entity = ent->as<c_entity>();
+      ClientClass* cl_class = ent->get_client_class();
 
-      // entity is invalid or is dead, skip
-      if(!entity || entity->is_dead())
+      if(!cl_class)
         continue;
 
-      // entity is the localplayer, skip
-      if(entity == ctx->local_player)
-        continue;
+      int x, y, w, h;
+      switch(cl_class->get_class()){
+        case e_class_ids::CTFPlayer: {
+          if(!settings::esp::draw_players)
+            break;
 
+          auto* player = ent->as<c_player>();
 
+          if(player->is_dead() || player == ctx->local_player)
+            break;
 
-      int x{}, y{}, w{}, h{};
+          if(!get_bounds(player, x, y, w, h))
+            break;
 
-      // FIXME: Riley; There is currently an issue where all "Player" texts only originate
-      // at 0, 0, 0. My assumption as it is right now may be due to clientclasses or one of the
-      // IClient virtual method tables being out of date. As stepping through the get_bounds()
-      // function with a debugger results in us never hitting CTFPlayer as our class.
-      // If anyone can figure it out, please make a PR!
-      if(get_bounds(entity, x, y, w, h)) {
+          const int draw_x = x + (w / 2);
+          int draw_y = x + (h / 2);
 
-        const int draw_x = x + (w / 2);
-        int       draw_y = y + (h / 2);
-        g_draw_threaded.string(nullptr, draw_x, draw_y, true, e_text_align::TEXT_LEFT,
-                               ImColor(1.f, 1.f, 1.f, 1.f), "Player");
+          //std::string health;
+          //health = std::format("{}", player->health());
+
+          //const char* hp = health.c_str();
+
+          //g_console->print(e_icon_type::CON_DEBUG, health);
+
+          // TODO: figure out how to get formatted strings.
+          // As it stands, we cannot use formatted strings as the output on the ESP is just a
+          // corrupted mess. I have no clue how to solve as it is right now. I've been spending too
+          // long on this ESP and I want to be done with it already.
+          g_draw_threaded.string(nullptr, draw_x, draw_y, true, e_text_align::TEXT_LEFT, ImColor(1.f, 1.f, 1.f, 1.f), "Player");
+          break;
+        }
+        default:
+          break;
       }
     }
   }
@@ -55,6 +68,8 @@ bool c_esp::get_bounds(c_entity* entity, int& x, int& y, int& w, int& h) {
   bool  is_player = false;
   ClientClass* c_class = entity->get_client_class();
 
+  // TODO: could this be removed?
+  // sanity check at this point...
   switch(c_class->get_class()) {
     case e_class_ids::CTFPlayer: {
       is_player = true;
@@ -78,7 +93,7 @@ bool c_esp::get_bounds(c_entity* entity, int& x, int& y, int& w, int& h) {
       break;
     }
     default: {
-      entity->get_render_bounds(vec_mins, vec_maxs);
+      // entity->get_render_bounds(vec_mins, vec_maxs);
       break;
     }
   }

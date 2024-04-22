@@ -35,7 +35,7 @@ void c_drawsystem::finish_paint(IDirect3DDevice9* device) {
 }
 // TODO: add font support
 void c_render::string(ImDrawList* list, ImFont* font, int x, int y, bool outlined,
-                      e_text_align align, ImColor col, const char* input, ...) {
+                      e_text_align align, ImColor col, const char* input) {
   if(!input) // we have no input, don't even bother trying
     return;
 
@@ -130,7 +130,7 @@ void c_render::box(ImDrawList* list, int x, int y, int w, int h, bool outlined, 
 // ========================================
 
 void c_render_threaded::string(ImFont* font, int x, int y, bool outlined, e_text_align align,
-                               ImColor col, const char* input, ...) {
+                               ImColor col, const char* input) {
   m_cmds.emplace_back(string_t{font, x, y, outlined, align, col, input});
 }
 

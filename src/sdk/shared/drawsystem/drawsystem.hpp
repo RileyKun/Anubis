@@ -19,7 +19,7 @@ enum class e_text_align : u8 {
 class c_render {
 public:
   void string(ImDrawList* list, ImFont* font, int x, int y, bool outlined, e_text_align align,
-              ImColor col, const char* input, ...);
+              ImColor col, const char* input);
   void circle(ImDrawList* list, int x, int y, float rad, bool outlined, ImColor col);
   void box(ImDrawList* list, int x, int y, int w, int h, bool outlined, ImColor col);
 };
@@ -29,7 +29,7 @@ public:
   c_render_threaded() = default;
 
   void string(ImFont* font, int x, int y, bool outlined, e_text_align align, ImColor col,
-              const char* input, ...);
+              const char* input);
   void circle(int x, int y, float rad, bool outlined, ImColor col);
   void box(int x, int y, int width, int height, bool outlined, ImColor col);
 
