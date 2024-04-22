@@ -20,7 +20,7 @@ void c_esp::run() {
         continue;
 
       int x, y, w, h;
-      switch(cl_class->get_class()){
+      switch(cl_class->get_class()) {
         case e_class_ids::CTFPlayer: {
           if(!settings::esp::draw_players)
             break;
@@ -34,20 +34,21 @@ void c_esp::run() {
             break;
 
           const int draw_x = x + (w / 2);
-          int draw_y = x + (h / 2);
+          int       draw_y = x + (h / 2);
 
-          //std::string health;
-          //health = std::format("{}", player->health());
+          // std::string health;
+          // health = std::format("{}", player->health());
 
-          //const char* hp = health.c_str();
+          // const char* hp = health.c_str();
 
-          //g_console->print(e_icon_type::CON_DEBUG, health);
+          // g_console->print(e_icon_type::CON_DEBUG, health);
 
           // TODO: figure out how to get formatted strings.
           // As it stands, we cannot use formatted strings as the output on the ESP is just a
           // corrupted mess. I have no clue how to solve as it is right now. I've been spending too
           // long on this ESP and I want to be done with it already.
-          g_draw_threaded.string(nullptr, draw_x, draw_y, true, e_text_align::TEXT_LEFT, ImColor(1.f, 1.f, 1.f, 1.f), "Player");
+          g_draw_threaded.string(nullptr, draw_x, draw_y, true, e_text_align::TEXT_LEFT,
+                                 ImColor(1.f, 1.f, 1.f, 1.f), "Player");
           break;
         }
         default:
@@ -60,12 +61,12 @@ void c_esp::run() {
 // credits: spook953?
 // nearly every esp is the same so
 bool c_esp::get_bounds(c_entity* entity, int& x, int& y, int& w, int& h) {
-  vec3  vec_mins{}, vec_maxs{};
+  vec3         vec_mins{}, vec_maxs{};
 
   // get our world transform
-  auto& trans = const_cast<matrix3x4&>(entity->renderable_to_world_transform());
+  auto&        trans = const_cast<matrix3x4&>(entity->renderable_to_world_transform());
 
-  bool  is_player = false;
+  bool         is_player = false;
   ClientClass* c_class = entity->get_client_class();
 
   // TODO: could this be removed?
