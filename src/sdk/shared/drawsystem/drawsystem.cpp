@@ -8,6 +8,11 @@
 // Initialize the drawsystem on the first frame of present.
 void c_drawsystem::initialize(IDirect3DDevice9* device, HWND window) {
   ImGui::CreateContext();
+
+  ImGuiIO io;
+  io = ImGui::GetIO();
+  io.IniFilename = nullptr;
+
   ImGui_ImplWin32_Init(window);
   ImGui_ImplDX9_Init(device);
 }
