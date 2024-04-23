@@ -34,7 +34,8 @@ void c_factory::startup() {
 void c_factory::shutdown() {
   g_console->print(e_icon_type::CON_STAGE, "Unload requested...");
   hooks(false);
-
+  g_console->print(e_icon_type::CON_OK, "Hooks released!");
+  Sleep(5);
   g_console->print(e_icon_type::CON_OK, "Cheat unloaded! Console closing in 5 seconds...");
   Sleep(5000);
   g_console->kill();
