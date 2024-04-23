@@ -8,3 +8,4 @@
 *.idea/
 # clang-d caching files
 *.cache/
+*.out/
