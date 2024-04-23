@@ -2,6 +2,8 @@
 
 #include "mathlib.hpp"
 
+#include "view_setup.hpp"
+
 class c_engine_client {
 public:
   void get_screen_size(int& w, int& h);
@@ -18,5 +20,5 @@ public:
   bool is_connected(void);
   // returns the game's root directory
   const char* get_game_directory(void);
-  const matrix3x4& world_to_screen_matrix(void);
+  const matrix4x4& world_to_screen_matrix(void);
 };

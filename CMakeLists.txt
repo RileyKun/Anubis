@@ -12,6 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Include CPM
 include(CPM.cmake)
 
+CPMAddPackage("gh:g-truc/glm#1.0.1")
 CPMAddPackage("gh:ocornut/imgui@1.90.5")
 CPMAddPackage("gh:cursey/safetyhook@0.4.1")
 # manual configuration required
@@ -37,7 +38,7 @@ add_library(Anubis SHARED
   src/sdk/valve/netvars/netvars.cpp
   src/sdk/valve/tf/c_entity.cpp
   
-  # interface map outs
+  # interfaces
   src/sdk/valve/engine_client.cpp
   src/sdk/valve/hl_client.cpp
   src/sdk/valve/surface.cpp
@@ -83,6 +84,7 @@ target_include_directories(Anubis PRIVATE src/cheat/features)
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   target_compile_definitions(Anubis PRIVATE
     NOMINMAX
+    GLM_FORCE_SWIZZLE
   )
   target_compile_options(Anubis PRIVATE
     /Od # Disable optimizations
@@ -93,6 +95,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
   target_compile_definitions(Anubis PRIVATE
     NOMINMAX
     NDEBUG
+    GLM_FORCE_SWIZZLE
   )
   target_compile_options(Anubis PRIVATE
     /O2 # Enable optimizations
@@ -103,6 +106,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   target_compile_definitions(Anubis PRIVATE
     NOMINMAX
     NDEBUG
+    GLM_FORCE_SWIZZLE
   )
   target_compile_options(Anubis PRIVATE
     /O2 # Enable optimizations
@@ -112,5 +116,5 @@ else()
   message(FATAL_ERROR "Your build type is not supported. Please check your toolchains and try again.")
 endif()
 
-# link safetyhook to our dll
-target_link_libraries(Anubis PRIVATE safetyhook::safetyhook d3d9)
+# link our dependencies to our dll
+target_link_libraries(Anubis PRIVATE safetyhook::safetyhook glm::glm d3d9)

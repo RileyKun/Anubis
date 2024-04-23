@@ -39,17 +39,19 @@ public:
 
 class c_ctx {
 public:
-  c_player* local_player = nullptr;
+  c_player*   local_player = nullptr;
 
-  int       screen_width = 0;
-  int       screen_height = 0;
+  int         screen_width = 0;
+  int         screen_height = 0;
 
-  v_matrix  matrix = {};
+  bool        has_spawned_once = false;
 
-  void      get_local();
+  matrix4x4 matrix = {};
+
+  void        get_local();
   // returns true if we should do an optimized render
-  bool      get_render_state();
-  void      set_render_state(bool state);
+  bool        get_render_state();
+  void        set_render_state(bool state);
 
 private:
   bool do_optimized_render = false;

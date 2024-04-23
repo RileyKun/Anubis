@@ -47,6 +47,6 @@ const char* c_engine_client::get_game_directory(void) {
   return memory::find_vfunc<const char*(__thiscall*)(void*)>(this, 35u)(this);
 }
 
-const matrix3x4& c_engine_client::world_to_screen_matrix(void) {
-  return memory::find_vfunc<const matrix3x4&(__thiscall*)(void*)>(this, 36u)(this);
+const matrix4x4& c_engine_client::world_to_screen_matrix(void) {
+  return memory::find_vfunc<const matrix4x4&(__thiscall*)(void*)>(this, 36u)(this);
 }
