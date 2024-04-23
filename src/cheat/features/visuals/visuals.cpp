@@ -4,6 +4,7 @@
 #include "link.hpp"
 
 #include <format>
+#include <array>
 
 void c_esp::run() {
   if(!settings::esp::esp_enabled)
@@ -34,7 +35,7 @@ void c_esp::run() {
             break;
 
           const int draw_x = x + (w / 2);
-          int       draw_y = x + (h / 2);
+          int       draw_y = y + (h / 2);
 
           // std::string health;
           // health = std::format("{}", player->health());
@@ -49,6 +50,7 @@ void c_esp::run() {
           // long on this ESP and I want to be done with it already.
           g_draw_threaded.string(nullptr, draw_x, draw_y, true, e_text_align::TEXT_LEFT,
                                  ImColor(1.f, 1.f, 1.f, 1.f), "Player");
+          g_draw_threaded.box(x, y, w, h, true, ImColor(1.f, 1.f, 1.f, 1.f));
           break;
         }
         default:
@@ -58,29 +60,23 @@ void c_esp::run() {
   }
 }
 
-// credits: spook953?
-// nearly every esp is the same so
+// The bounding box math for this is fucked.
+// Someone fix this!
 bool c_esp::get_bounds(c_entity* entity, int& x, int& y, int& w, int& h) {
   vec3         vec_mins{}, vec_maxs{};
 
-  // get our world transform
-  auto&        trans = const_cast<matrix3x4&>(entity->renderable_to_world_transform());
-
-  bool         is_player = false;
   ClientClass* c_class = entity->get_client_class();
 
   // TODO: could this be removed?
   // sanity check at this point...
   switch(c_class->get_class()) {
     case e_class_ids::CTFPlayer: {
-      is_player = true;
       vec_mins = entity->mins();
       vec_maxs = entity->maxs();
 
       if(entity->entidx() == g_tf2.engine_client->get_local_player()) {
         // QAngle va; g_tf2.engine_client->get_view_angles(va);
         // va.x = va.y = 0.f;
-        //  TODO: implement this
         //  we need to add anglematrix and matrixsetcolumn to the mathex namespace
       }
 
@@ -101,6 +97,34 @@ bool c_esp::get_bounds(c_entity* entity, int& x, int& y, int& w, int& h) {
 
   // generate our points
   vec3 points[] = {
+      vec3(vec_mins.x, vec_mins.y, vec_mins.z), vec3(vec_mins.x, vec_maxs.y, vec_mins.z),
+      vec3(vec_maxs.x, vec_maxs.y, vec_mins.z), vec3(vec_maxs.x, vec_mins.y, vec_mins.z),
+      vec3(vec_maxs.x, vec_maxs.y, vec_maxs.z), vec3(vec_mins.x, vec_maxs.y, vec_maxs.z),
+      vec3(vec_mins.x, vec_mins.y, vec_maxs.z), vec3(vec_maxs.x, vec_mins.y, vec_maxs.z)};
+
+  std::array<vec3, 8> bbox{};
+  std::array<vec2, 8> w2s_bbox{};
+  // get our world transform
+  auto&        trans = const_cast<matrix3x4&>(entity->renderable_to_world_transform());
+  for(auto i = 0; i < 8; ++i) {
+    math::vector_transform(points[i], trans, points[i]);
+
+    if(!g_tf2.w2s(points[i], w2s_bbox[i]))
+      continue;
+
+    x = static_cast<int>(glm::min((float)x, w2s_bbox[i].x));
+    y = static_cast<int>(glm::min((float)y, w2s_bbox[i].y));
+    w = static_cast<int>(glm::max((float)w, w2s_bbox[i].x));
+    h = static_cast<int>(glm::max((float)h, w2s_bbox[i].y));
+
+    w -= x;
+    h -= y;
+    return true;
+  }
+  return false;
+
+  // generate our points
+  /*vec3 points[] = {
       vec3(vec_mins.x, vec_mins.y, vec_mins.z), vec3(vec_mins.x, vec_maxs.y, vec_mins.z),
       vec3(vec_maxs.x, vec_maxs.y, vec_mins.z), vec3(vec_maxs.x, vec_mins.y, vec_mins.z),
       vec3(vec_maxs.x, vec_maxs.y, vec_maxs.z), vec3(vec_mins.x, vec_maxs.y, vec_maxs.z),
@@ -161,5 +185,5 @@ bool c_esp::get_bounds(c_entity* entity, int& x, int& y, int& w, int& h) {
       return x <= ctx->screen_width && (x + w) >= 0 && y <= ctx->screen_height && (y + h) >= 0;
     }
   }
-  return false;
+  return false;*/
 }

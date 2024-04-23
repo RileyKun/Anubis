@@ -25,12 +25,11 @@ void __fastcall hooks::fs_notify::hooked_fs_notify(void* ecx, void* edx, frame_s
         break;
 
       ctx->get_render_state();
-      g_tf2.update_w2s();
 
       if(g_tf2.engine_client->is_connected()) {
 
         if(ctx->local_player) {
-          f::esp.run();
+          //f::esp.run();
         }
 
       }
