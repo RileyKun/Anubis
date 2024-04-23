@@ -36,6 +36,8 @@ Our dependencies are the following:
 - CPM.cmake
 - SafetyHook
 - Zydis (required by SafetyHook)
+- OpenGL Mathematics
+- Dear ImGui
 
 If a change you wish to make requires a dependency be added, **please make a GitHub issue before commiting!** Failure to do this will result in your PR being rejected. We want Anubis to be lightweight and as free from dependencies as possible.  
 We code in focus for the MSVC. We do not support the GCC or other compilers. You may use clang-cl under the MSVC. If you cannot compile using clang-cl, please make a GitHub issue.
