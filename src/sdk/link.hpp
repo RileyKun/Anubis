@@ -32,9 +32,8 @@ public:
   i_client_mode_shared* client_mode = nullptr;
   i_client_entity_list* entity_list = nullptr;
   iv_render_view*       render_view = nullptr;
-  //
-  bool           w2s(const vec3& origin, vec3& project);
-  void update_w2s();
+
+  bool                  w2s(const vec3& origin, vec2& project);
 };
 
 class c_ctx {

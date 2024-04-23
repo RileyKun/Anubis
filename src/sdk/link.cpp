@@ -14,45 +14,20 @@ void c_ctx::set_render_state(bool state) {
   this->do_optimized_render = state;
 }
 
-// credits: JAGNEmk
-bool c_tf2::w2s(const vec3& origin, vec3& project) {
-  const matrix3x4& w2s = ctx->matrix.as_3x4();
+// credits: D3X - From his L4D2 cheat.
+bool c_tf2::w2s(const vec3& origin, vec2& project) {
+  const auto& matrix = g_tf2.engine_client->world_to_screen_matrix();
+  const auto  w = glm::dot(matrix[3].xyz(), origin) + matrix[3].w;
 
-  float w = w2s[3][0] * origin[0] + w2s[3][1] * origin[1] + w2s[3][2] * origin[2] + w2s[3][3];
+  if(w <= 0.001f)
+    return false;
 
-  if(w > 0.001f) {
-    auto width = static_cast<float>(ctx->screen_width);
-    auto height = static_cast<float>(ctx->screen_height);
-    float dbw = 1.0f / w;
+  const vec2 clip_space(glm::dot(matrix[0].xyz(), origin) + matrix[0].w,
+                        glm::dot(matrix[1].xyz(), origin) + matrix[1].w);
 
-    project.x =
-        (width / 2.0f) +
-        (0.5f *
-             ((w2s[0][0] * origin[0] + w2s[0][1] * origin[1] + w2s[0][2] * origin[2] + w2s[0][3]) *
-              dbw) *
-             width +
-         0.5f);
-    project.y =
-        (height / 2.0f) -
-        (0.5f *
-             ((w2s[1][0] * origin[0] + w2s[1][1] * origin[1] + w2s[1][2] * origin[2] + w2s[1][3]) *
-              dbw) *
-             height +
-         0.5f);
+  const auto normalized_space = clip_space / w;
 
-    return true;
-  }
-  return false;
-}
-
-void c_tf2::update_w2s() {
-  c_view_setup view_setup{};
-
-  if(g_tf2.hl_client->get_player_view(view_setup)) {
-    v_matrix w2v{};
-    v_matrix w2p{};
-    v_matrix w2px{};
-
-    g_tf2.render_view->get_matrices_for_view(view_setup, &w2v, &w2p, &ctx->matrix, &w2px);
-  }
+  project.x = (1.f + normalized_space.x) * ((float)ctx->screen_width / 2.f);
+  project.y = (1.f + normalized_space.y) * ((float)ctx->screen_height / 2.f);
+  return true;
 }
