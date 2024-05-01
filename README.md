@@ -1,5 +1,7 @@
 # Anubis
 A free open-source cheat for Team Fortress 2.
+## Notice
+Due to lack of motivation, I'm archiving this.
 ## About
 Anubis is a free, minimalist, open-source cheat for Team Fortress 2. It currently only supports the 32-bit version of the latest game binaries.
 ## How to download?
